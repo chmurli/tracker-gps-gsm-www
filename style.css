@@ -1,0 +1,358 @@
+
+/* GŁÓWNE --------------------------------------- */
+
+body {
+	background: #b0c4de;
+	text-align: center;
+	vertical-align: top;
+	margin: 0px auto 0px auto;
+	}
+
+img {
+	text-align: center;
+	vertical-align: top;
+	border: none;
+	margin: 0px auto 0px auto;
+	}
+	
+.googlemaps {
+	width: 900px;
+	height: 500px;
+	border: 1px solid #000000;
+	background: #f0eeee;
+	padding: 5px 5px 5px 5px;
+	margin: 10px auto 10px auto;
+	font-family: Arial;
+	font-size: 10pt;
+	color: #000000;
+	text-align: left;
+	font-weight: normal;
+	text-decoration: none;
+	}
+
+
+
+
+/* H{1,2,3,4,5,6,7} --------------------------------------- */
+
+
+h1 {
+	color: #000000;
+	font: normal 100 25px Arial Black;	
+	padding: 0px 0px 0px 0px;
+	margin: 10px auto 0px auto;
+	}
+
+h2 {
+	color: #d90000;
+	font:  normal 100 15px Arial Black;	
+	padding: 0px 0px 0px 0px;
+	margin: 0px auto 20px auto;
+	}
+
+h3 {
+	color: #d90000;
+	font:  normal 100 13px Arial;	
+	padding: 0px 0px 0px 0px;
+	margin: 0px auto 20px auto;
+	}
+
+
+/* UL, LI --------------------------------------- */
+
+#header ul {
+	text-align: center;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	}
+
+
+#header li {
+	display: inline;
+	}
+	
+
+
+/* DIV'Y --------------------------------------- */
+
+div#logo {
+	color: #D90000;
+	font: normal 100 25px Arial Black;
+	text-align: center;
+	border: 1px dotted #000000;
+	width: 500px; 
+	background: #f0eeee;
+	padding: 5px 5px 5px 5px;
+	margin: 5px auto 5px auto;
+	}
+
+div#header {
+	text-align: center;
+	font-weight: bold;
+	font-family: Arial;
+	font-size: 10pt;
+	width: 500px; 
+	background: #f0eeee;
+	border: 1px dotted #000000;
+	padding: 5px 5px 5px 5px;
+	margin: 5px auto 5px auto;
+	}
+	
+div#content {
+	font-family: Arial;
+	font-size: 10pt;
+	color: #000000;	
+	font-weight: normal;
+	width: 500px;
+	border: 1px dotted #000000;
+	text-align: left;
+	background: #f0eeee;
+	padding: 15px 5px 15px 5px;
+	margin: 5px auto 5px auto;
+	}
+	
+div#footer {
+	font-family: Arial;
+	font-size: 8pt;
+	color: #000000;
+	font-weight: normal;
+	text-decoration: none;
+	text-align: center;
+	border: 1px dotted #000000;
+	width: 500px; 
+	background: #f0eeee;
+	padding: 5px 5px 5px 5px;
+	margin: 5px auto 5px auto;
+	}
+
+div.blad, div.nie {
+	color: #ff0000;
+	font-weight: bold;
+	}
+
+div.ok, div.tak {
+	color: #008000;
+	font-weight: bold;
+	}
+
+
+/* FORMULARZE --------------------------------------- */
+
+
+form {
+	text-align: center;
+	margin: 10px 0px 10px 0px;
+	font-family: Arial;
+	font-size: 10pt;
+	color: #000000;
+	text-align: center;
+	font-weight: normal;
+	text-decoration: none;
+	}
+	
+input {
+	background-color: #ffffff;
+	color: #000000;
+	border: 1px solid #000000;
+	margin: 1px 1px 1px 1px;
+	}
+	
+select {
+	background-color: #ffffff;
+	color: #000000;
+	border: 1px solid #000000;
+	margin: 1px 1px 1px 1px;
+	}
+	
+textarea {
+	background-color: #ffffff;;
+	color: #000000;
+	border: 1px solid #000000;
+	vertical-align: top;
+	}
+
+/* P --------------------------------------- */
+
+p {
+	font-family: Arial;
+	font-size: 10pt;
+	color: #000000;
+	text-align: left;
+	font-weight: normal;
+	text-decoration: none;
+	margin: 0px auto 0px auto;
+	}
+
+p.ostatniaPozycja {
+	text-align: left;
+	font-weight: bold;
+	font-family: Arial;
+	font-size: 12pt;
+	color: #D90000;
+	}
+
+
+/* TABELE --------------------------------------- */
+
+table, tr, th, td {
+	text-align: center;
+	margin: auto auto auto auto;
+	padding: 0;
+	}
+
+#mapka table {
+	text-align: left;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	}
+
+#mapka tr {
+	text-align: left;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	}
+
+
+#mapka td {
+	text-align: left;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	}
+
+
+
+
+#przegladaj table {
+	font-family: Arial;
+	font-size: 10pt;
+	border-right: 1px dotted #000000;
+	border-bottom: 1px dotted #000000;
+	text-align: left;
+	margin: 5px auto 5px auto;
+	background: #f0eeee;
+	border-collapse: collapse
+	}
+
+#przegladaj tr:hover {
+	background: #D90000;
+	color: #ffffff;
+	}
+
+#przegladaj th {
+	color: #ffffff;
+	background: #000000;
+	font-weight: bold;
+	border-left: 1px dotted #000000;
+	border-top: 1px dotted #000000;
+	padding: 5px 5px 5px 5px;
+	}
+
+#przegladaj td {
+	border-left: 1px dotted #000000;
+	border-top: 1px dotted #000000;
+	text-align: left;
+	padding: 3px 3px 3px 3px;
+	}
+
+/* start sekcje td dla poszczegolnych kolumn tabel --------------------------------------- */	
+
+	
+#przegladaj td.nr {
+	width: 10px;
+	text-align: center;
+	}
+
+#przegladaj td.date {
+	width: 150px;
+	text-align: center;
+	}
+
+#przegladaj td.latitude {
+	width: 120px;
+	text-align: center;
+	}
+	
+#przegladaj td.longitude {
+	width: 120px;
+	text-align: center;
+	}
+
+#przegladaj td.altitude {
+	width: 80px;
+	text-align: center;
+	}
+
+#przegladaj td.speed {
+	width: 50px;
+	text-align: center;
+	}
+
+#przegladaj td.satellites {
+	width: 40px;
+	text-align: center;
+	}
+
+#przegladaj td.pdop {
+	width: 40px;
+	text-align: center;
+	}
+
+#przegladaj td.mode {
+	width: 30px;
+	text-align: center;
+	}
+
+
+
+
+
+/* ODNIŚNIKI --------------------------------------- */
+
+a.link1 {
+	font-family: Arial;
+	font-size: 10pt;
+	color: #000000;
+	font-weight: bold;
+	text-decoration: none;
+	text-align: right;
+	margin: 0px 0px 0px 0px;
+	}
+
+a.link1:hover {
+	font-family: Arial;
+	font-size: 10pt;
+	color: #000000;
+	font-weight: bold;
+	text-decoration: underline;
+	margin: 0px 0px 0px 0px;
+	}
+
+a.link2 {
+	font-family: Arial;
+	font-size: 10pt;
+	color: #000000;
+	font-weight: normal;
+	text-decoration: none;
+	background-color: #D0E5F5;
+	border: 1px solid #000000;
+	text-align: right;
+	}
+
+a.link2:hover {
+	font-family: Arial;
+	font-size: 10pt;
+	color: #ffffff;
+	font-weight: normal;
+	text-decoration: none;
+	background-color: #000000;
+	border: 1px solid #000000;
+	}
+
+
+
+
+
+
+
+
+	
