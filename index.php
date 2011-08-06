@@ -102,6 +102,13 @@
 
 	<br />
 
+	<?php 	// oblicz czas generowania strony, korzystamy z pliku z funkcjami
+		$time_end = getmicrotime();
+		$time = substr($time_end - $time_start, 0, 6);
+		echo ("Czas generowania strony wyniósł <b>".$time."</b> sekund");
+	?>
+
+
 	
 </div>
 
