@@ -5,10 +5,10 @@
 // standardowe łaczenie się z bazą mysql i wybieranie odpowiedniej bazy
 function connectToMySql() {
 
-		$db = mysql_connect(_HOST, _DB_USER, _DB_PASS);	
+		$db = mysql_pconnect(_HOST, _DB_USER, _DB_PASS);	
 
 		if (!$db) {
-			echo "Połączenie z bazą się nie powiodło!";		
+			echo 'Połączenie z bazą się nie powiodło!';		
 			return false;
 		}	
 		
@@ -17,7 +17,7 @@ function connectToMySql() {
 		
 
 		if (!@mysql_select_db(_DB_NAME)) {
-			echo "Wybieranie bazy danych nie powiodło się!";		
+			echo 'Wybieranie bazy danych nie powiodło się!';		
 			return false;
 		}
         

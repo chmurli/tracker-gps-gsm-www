@@ -94,22 +94,22 @@
 
 
 	// ilość wszystkich rekordów w bazie
-	$result=mysql_query("SELECT * FROM ". _DB_TABLE." ORDER BY id DESC");
+	$result=mysql_query('SELECT * FROM '._DB_TABLE.' ORDER BY id DESC');
 	if (!$result) {
-		echo "Błąd. Połączenie nie powiodło się!";
+		echo 'Błąd. Połączenie nie powiodło się!';
 		exit;
 	}
 	$rowsAll=mysql_num_rows($result);
 
 
 	if($data1 && $data2 && $godzina1 && $godzina2)	
-		$result=mysql_query("SELECT * FROM ". _DB_TABLE." WHERE date >= '$data1 $godzina1' AND date <= '$data2 $godzina2' ORDER BY id DESC");
+		$result=mysql_query('SELECT * FROM '._DB_TABLE.' WHERE date >= \''.$data1.' '.$godzina1.'\' AND date <= \''.$data2.' '.$godzina2.'\' ORDER BY id DESC');
 	else
-		$result=mysql_query("SELECT * FROM ". _DB_TABLE." ORDER BY id DESC LIMIT 0 , $pozycje");
+		$result=mysql_query('SELECT * FROM '._DB_TABLE.' ORDER BY id DESC LIMIT 0 , '.$pozycje);
 
 		
 	if (!$result) {
-		echo "Błąd. Połączenie nie powiodło się!";
+		echo 'Błąd. Połączenie nie powiodło się!';
 		exit;
 	}
 		
@@ -123,66 +123,66 @@
 
 
 		// start mapy
-		echo "
+		echo '
 			function mapaStart() 
 			{ 
 				// punkt startowy, centruj na ostatniej pozycję
-				var wspolrzedne = new google.maps.LatLng(".$row['latitude'].",".$row['longitude'].");
+				var wspolrzedne = new google.maps.LatLng('.$row['latitude'].','.$row['longitude'].');
 				var opcjeMapy = {
 					zoom: 18,
 					center: wspolrzedne,
 					mapTypeId: google.maps.MapTypeId.SATELLITE,
 					scaleControl: true	// kontrolka skali
 			};
-			mapa = new google.maps.Map(document.getElementById(\"mapka\"), opcjeMapy);
-		";
+			mapa = new google.maps.Map(document.getElementById("mapka"), opcjeMapy);
+		';
 
 
 		// wyświetl marker z ostatnią pozycją (zawsze)
-		echo "
-			var marker1 = dodajMarker(".$row['latitude'].",".$row['longitude'].",'\
-				\<p class=\"ostatniaPozycja\"\>Ostatnia pozycja\<\/p\>\<br \/\>\
-				\<strong\>data: \<\/strong\>".$row['date']."\<br \/\>\
-				\<strong\>prędkość: \<\/strong\>".$row['speed']." km/h\<br \/\>\
-				\<strong\>wysokość: \<\/strong\>".$row['altitude']." m. n.p.m.\<br \/\>\
-				\<strong\>satelity: \<\/strong\>".$row['satellites']."\<br \/\>\
-				\<strong\>tryb: \<\/strong\>".$row['mode']."\<br \/\>\
-				\<strong\>pdop: \<\/strong\>".$row['pdop']."\<br \/\>\
-				\<strong\>szer. geo.: \<\/strong\>".$row['latitude']."\<br \/\>\
-				\<strong\>dł. geo.: \<\/strong\>".$row['longitude']."\<br \/\>\
-				',ikona1);
-		";
+		echo '
+			var marker1 = dodajMarker('.$row['latitude'].','.$row['longitude'].',\'\
+				<p class="ostatniaPozycja">Ostatnia pozycja</p><br />\
+				<strong>data: </strong>'.$row['date'].'<br />\
+				<strong>prędkość: </strong>'.$row['speed'].' km/h<br />\
+				<strong>wysokość: </strong>'.$row['altitude'].' m. n.p.m.<br />\
+				<strong>satelity: </strong>'.$row['satellites'].'<br />\
+				<strong>tryb: </strong>'.$row['mode'].'<br />\
+				<strong>pdop: </strong>'.$row['pdop'].'<br />\
+				<strong>szer. geo.: </strong>'.$row['latitude'].'<br />\
+				<strong>dł. geo.: </strong>'.$row['longitude'].'<br />\
+				\',ikona1);
+		';
 		
 		// tablica z punktami dla polilinii, dodajemy pierwszy element
-		echo "
-			var poliliniaPunkty = [new google.maps.LatLng(".$row['latitude'].",".$row['longitude'].")];	
-		";
+		echo '
+			var poliliniaPunkty = [new google.maps.LatLng('.$row['latitude'].','.$row['longitude'].')];	
+		';
 
 
 		
 		for ($i=2,$j=1; $row=mysql_fetch_array($result); $i++,$j++) {
 				
-			// jeżeli tak wybrane to wyświetl markery kolejnych pozycji
+			// jeżeli opcja zaznaczona to wyświetl markery wszystkich pozycji
 			if($markery) {
-				echo "
-					var marker".$i." = dodajMarker(".$row['latitude'].",".$row['longitude'].",'\
-						\<strong\>pozycja: ".$i."\<\/strong\>\<br \/\>\
-						\<strong\>data: \<\/strong\>".$row['date']."\<br \/\>\
-						\<strong\>prędkość: \<\/strong\>".$row['speed']." km/h\<br \/\>\
-						\<strong\>wysokość: \<\/strong\>".$row['altitude']." m. n.p.m.\<br \/\>\
-						\<strong\>satelity: \<\/strong\>".$row['satellites']."\<br \/\>\
-						\<strong\>tryb: \<\/strong\>".$row['mode']."\<br \/\>\
-						\<strong\>pdop: \<\/strong\>".$row['pdop']."\<br \/\>\
-						\<strong\>szer. geo.: \<\/strong\>".$row['latitude']."\<br \/\>\
-						\<strong\>dł. geo.: \<\/strong\>".$row['longitude']."\<br \/\>\
-						',ikona2);
-				";	
+				echo '
+					var marker'.$i.' = dodajMarker('.$row['latitude'].','.$row['longitude'].',\'\
+						<strong>pozycja: '.$i.'</strong><br />\
+						<strong>data: </strong>'.$row['date'].'<br />\
+						<strong>prędkość: </strong>'.$row['speed'].' km/h<br />\
+						<strong>wysokość: </strong>'.$row['altitude'].' m. n.p.m.<br />\
+						<strong>satelity: </strong>'.$row['satellites'].'<br />\
+						<strong>tryb: </strong>'.$row['mode'].'<br />\
+						<strong>pdop: </strong>'.$row['pdop'].'<br />\
+						<strong>szer. geo.: </strong>'.$row['latitude'].'<br />\
+						<strong>dł. geo.: </strong>'.$row['longitude'].'<br />\
+						\',ikona2);
+				';	
 			}
 			
 			// dodaj kolejne elementy do tablicy punktów do polilinii
-			echo "
-				poliliniaPunkty[".$j."] = new google.maps.LatLng(".$row['latitude'].",".$row['longitude'].");	
-			";
+			echo '
+				poliliniaPunkty['.$j.'] = new google.maps.LatLng('.$row['latitude'].','.$row['longitude'].');	
+			';
 			
 		} // koniec pętli for
 		
@@ -215,9 +215,9 @@
 <!-- zmiana ustawień wyświetlania mapy -->  
 <form method="get" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>">
 	ilość wyświetlanych <b>ostatnich</b> pozycji:
-	<input name="pozycje" type="text" size="15" value="<?php if($pozycje) echo $pozycje; else echo "100"; ?>" />
+	<input name="pozycje" type="text" size="15" value="<?php if($pozycje) echo $pozycje; else echo '100'; ?>" />
 	&nbsp;&nbsp;
-	<input type="checkbox" name="markery" value="1" <?php if($markery) echo "checked=\"checked\""; ?> /> 
+	<input type="checkbox" name="markery" value="1" <?php if($markery) echo 'checked="checked"'; ?> /> 
 	pokazuj markery
 	&nbsp;&nbsp;	
 	<input type="hidden" name="show" value="view_googlemaps" />
@@ -232,12 +232,12 @@
 	<table>
 	<tr>
 		<td><b>od:</b></td>
-		<td><script>DateInput('data1', true, 'YYYY-MM-DD' <?php if($data1) echo ", '$data1'"; ?>)</script></td>
+		<td><script>DateInput('data1', true, 'YYYY-MM-DD' <?php if($data1) echo ', \''.$data1.'\''; ?>)</script></td>
 		<td><input name="godzina1" type="text" size="5" maxlength="5" value="<?php if($godzina1) echo $godzina1; else echo "06:00"; ?>" /></td>
 	</tr>
 	<tr>
 		<td><b>do:</b></td>
-		<td><script>DateInput('data2', true, 'YYYY-MM-DD' <?php if($data2) echo ", '$data2'"; ?>)</script></td>
+		<td><script>DateInput('data2', true, 'YYYY-MM-DD' <?php if($data2) echo ', \''.$data2.'\''; ?>)</script></td>
 		<td><input name="godzina2" type="text" size="5" maxlength="5" value="<?php if($godzina2) echo $godzina2; else echo "23:59"; ?>" /></td>
 	</tr>
 	</table>

@@ -2,9 +2,9 @@
 
 	error_reporting(E_ALL);
 
-	echo '<?xml version="1.0" encoding="UTF-8"?'.">\n";
-	include("includes/config.php"); 		// stałe konfiguracyjne
-	include("includes/functions.php"); 	// funkcje
+	echo '<?xml version="1.0" encoding="UTF-8"?>';
+	include('includes/config.php'); 		// stałe konfiguracyjne
+	include('includes/functions.php'); 	// funkcje
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
@@ -67,20 +67,18 @@
 	$allowed = array('start', 'view_googlemaps', 'view_table');
 
 	if (in_array($show, $allowed)) { 
-		include("show/".$show.".php");
+		include('show/'.$show.'.php');
 	} 
 	else { 
 		// jeżeli wartość niepoprawna (możliwa próba włamania)
 		// wyświetl stronę startową
-		include("show/start.php");
+		include('show/start.php');
 	}
 
 
 
 
 ?>
-
-
 
 
 
@@ -106,9 +104,6 @@
 
 	
 </div>
-
-
-
 
 
 
