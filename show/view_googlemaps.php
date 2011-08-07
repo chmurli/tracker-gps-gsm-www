@@ -92,28 +92,44 @@
 
 	connectToMySql();
 
-
 	// ilość wszystkich rekordów w bazie
-	$result=mysql_query('SELECT * FROM '._DB_TABLE.' ORDER BY id DESC');
-	if (!$result) {
-		echo 'Błąd. Połączenie nie powiodło się!';
-		exit;
-	}
-	$rowsAll=mysql_num_rows($result);
+	$rowsAll=countRowsAll();
 
 
-	if($data1 && $data2 && $godzina1 && $godzina2)	
-		$result=mysql_query('SELECT * FROM '._DB_TABLE.' WHERE date >= \''.$data1.' '.$godzina1.'\' AND date <= \''.$data2.' '.$godzina2.'\' ORDER BY id DESC');
+	// jeżeli wszystkie wartości podane to wyświetlamy wg. kalendarza
+	if($data1 && $data2 && $godzina1 && $godzina2)
+		$kalendarz=1;
 	else
-		$result=mysql_query('SELECT * FROM '._DB_TABLE.' ORDER BY id DESC LIMIT 0 , '.$pozycje);
+		$kalendarz=0;
 
+	
+	// wspólna część zapytania
+	$query='SELECT * FROM '._DB_TABLE.' ';
+
+
+	// tworzymy resztę zapytania zależnie od tego co wyświetlić
+	if($kalendarz) {
 		
+		$query2='WHERE date >= \''.$data1.' '.$godzina1.'\' AND date <= \''.$data2.' '.$godzina2.'\' ORDER BY id DESC';
+		// znajdź ilość rekordów spełniających warunki
+		$rowsFounded=countRows($query2);
+	} else {
+
+		$query2='ORDER BY id DESC LIMIT 0 , '.$pozycje;
+		// docelowo ilość znalezionych rekordów=$pozycje, ale musimy się upewnić czy w ogóle coś znajdziemy lub znajdziemy mniej
+		$rowsFounded=countRows($query2);
+	}
+
+
+	// złącz ostateczne zapytanie
+	$query.=$query2;
+
+	$result=mysql_query($query);
 	if (!$result) {
 		echo 'Błąd. Połączenie nie powiodło się!';
 		exit;
 	}
-		
-	$rowsFounded=mysql_num_rows($result);
+
 
 	// jeżeli są jakies dane do wyświetlenia
 	if ($rowsFounded) { 
@@ -160,7 +176,7 @@
 
 
 		
-		for ($i=2,$j=1; $row=mysql_fetch_array($result); $i++,$j++) {
+		for ($i=2,$j=1; $row=mysql_fetch_array($result); ++$i,++$j) {
 				
 			// jeżeli opcja zaznaczona to wyświetl markery wszystkich pozycji
 			if($markery) {
@@ -258,12 +274,12 @@
 	if(!$rowsFounded) {
 		echo "<h2>BRAK DANYCH DO WYŚWIETLENIA <br />";
 		// jeżeli nie ma żadnych danych w bazie
-		if ($rowsAll==0)
+		if (!$rowsAll)
 			echo "BAZA DANYCH JEST PUSTA</h2>";
 		// dane w bazie są, trzeba zmienić zapytanie
 		else {
 			echo "ZMIEŃ USTAWIENIA</h2>";
-			echo "<h3>wszystkich rekordów w bazie: $rowsAll</h3>";
+			echo "<h3>wszystkich pozycji w bazie: $rowsAll</h3>";
 		}
 	}
 ?>

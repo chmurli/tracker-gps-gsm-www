@@ -138,6 +138,12 @@ div.ok, div.tak {
 	font-weight: bold;
 	}
 
+div.przewijaj_tabele {
+	padding: 0px 0px 0px 0px;
+	margin: 10px auto 20px auto;
+	text-align: center;
+	}
+
 
 /* FORMULARZE --------------------------------------- */
 
@@ -265,6 +271,11 @@ table, tr, th, td {
 	text-align: center;
 	}
 
+#przegladaj td.id {
+	width: 50px;
+	text-align: center;
+	}
+
 #przegladaj td.date {
 	width: 150px;
 	text-align: center;
@@ -309,7 +320,7 @@ table, tr, th, td {
 
 
 
-/* ODNIŚNIKI --------------------------------------- */
+/* ODNOŚNIKI --------------------------------------- */
 
 a.link1 {
 	font-family: Arial;
@@ -322,12 +333,7 @@ a.link1 {
 	}
 
 a.link1:hover {
-	font-family: Arial;
-	font-size: 10pt;
-	color: #000000;
-	font-weight: bold;
 	text-decoration: underline;
-	margin: 0px 0px 0px 0px;
 	}
 
 a.link2 {
@@ -342,16 +348,27 @@ a.link2 {
 	}
 
 a.link2:hover {
-	font-family: Arial;
-	font-size: 10pt;
 	color: #ffffff;
-	font-weight: normal;
-	text-decoration: none;
 	background-color: #000000;
-	border: 1px solid #000000;
 	}
 
+a.link3 {
+	font-family: Arial;
+	font-size: 11pt;
+	color: #000000;
+	font-weight: normal;
+	text-decoration: none;
+	background-color: #D0E5F5;
+	border: 1px solid #000000;
+	text-align: center;
+	padding: 1px 4px 1px 4px;
+	margin: auto 1px auto 1px;
+	}
 
+a.link3:hover {
+	color: #ffffff;
+	background-color: #000000;
+	}
 
 
 

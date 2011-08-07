@@ -32,6 +32,38 @@ function connectToMySql() {
 	}     
 }
 
+//zwraca ilość wszystkich rekordów w bazie
+function countRowsAll(){
+	
+	$query='SELECT Count( id ) AS rowsNumber FROM '._DB_TABLE;
+	$result=mysql_query($query);
+	if (!$result) {
+		echo 'Błąd. Połączenie nie powiodło się!';
+		exit;
+	}
+
+	$row=mysql_fetch_array($result);
+	return $row['rowsNumber'];
+}
+
+
+//zwraca ilość rekordów spełniających warunek
+function countRows($query2){
+	
+	$query='SELECT Count( id ) AS rowsNumber FROM '._DB_TABLE.' '.$query2;
+	$result=mysql_query($query);
+	if (!$result) {
+		echo 'Błąd. Połączenie nie powiodło się!';
+		exit;
+	}
+
+	$row=mysql_fetch_array($result);
+	return $row['rowsNumber'];
+}
+
+
+
+
 
 
 
