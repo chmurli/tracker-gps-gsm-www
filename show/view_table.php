@@ -2,7 +2,7 @@
 
 
 
-	// sprawdź ile pozycji ma być wyświetlanych na jednej stronie
+	// sprawdź ile maksymalnie pozycji ma być wyświetlanych na jednej stronie
 	if (isset($_GET['pozycje_limit'])) 
 		$pozycje_limit=(int)($_GET['pozycje_limit']);
 	else $pozycje_limit=25;
@@ -46,12 +46,12 @@
 	<table>
 	<tr>
 		<td><b>od:</b></td>
-		<td><script>DateInput('data1', true, 'YYYY-MM-DD' <?php if($data1) echo ', \''.$data1.'\''; ?>)</script></td>
+		<td><script type="text/javascript">DateInput('data1', true, 'YYYY-MM-DD' <?php if($data1) echo ', \''.$data1.'\''; ?>)</script></td>
 		<td><input name="godzina1" type="text" size="5" maxlength="5" value="<?php if($godzina1) echo $godzina1; else echo '06:00'; ?>" /></td>
 	</tr>
 	<tr>
 		<td><b>do:</b></td>
-		<td><script>DateInput('data2', true, 'YYYY-MM-DD' <?php if($data2) echo ', \''.$data2.'\''; ?>)</script></td>
+		<td><script type="text/javascript">DateInput('data2', true, 'YYYY-MM-DD' <?php if($data2) echo ', \''.$data2.'\''; ?>)</script></td>
 		<td><input name="godzina2" type="text" size="5" maxlength="5" value="<?php if($godzina2) echo $godzina2; else echo '23:59'; ?>" /></td>
 	</tr>
 	</table>
@@ -132,7 +132,11 @@
 			echo '
 				<p class="center">
 				znalezionych pozycji: <strong>'.$rowsFounded.' z '.$rowsAll.'</strong><br />
-				od <strong>'.$data1.' '.$godzina1.'</strong> do <strong>'.$data2.' '.$godzina2.'</strong><br /><br />
+				od <strong>'.$data1.' '.$godzina1.'</strong> do <strong>'.$data2.' '.$godzina2.'</strong><br />
+				<br />
+				<a href="'.htmlentities($_SERVER['PHP_SELF']).'?show=view_table" class="link1">
+				przejdź do wyświetlanie wszystkich pozycji</a>
+				<br /><br />
 				</p>
 			';
 		} else {
@@ -145,7 +149,7 @@
 			<div id="przegladaj">
 			<table>
 				<tr>
-					<th title="liczba porządkowa (nr.)">lp.</th>
+					<th title="liczba porządkowa">lp.</th>
 					<th title="numer ID w tabeli">id</th>
 					<th title="znacznik daty (date)">data</th>
 					<th title="szerokość geograficzna (latitude)">szer. geo.</th>
@@ -182,6 +186,7 @@
 		echo '</table></div>';
 		
 		
+		
 		// wspólny początek dla przesyłania GET'em 
 		$get1='?show=view_table&pozycje_limit='.$pozycje_limit;
 		if($kalendarz){
@@ -197,28 +202,53 @@
 		if($rowsFounded > $pozycje_limit){
 			
 			$iloscStron=(int)($rowsAll/$pozycje_limit)+1;
+			$stronyOdstep=4;
 			
-			// "przewijanie" na dalsze miejsca tabeli
-			for ($i=1; $i <= $iloscStron && $i <= 5; ++$i) {
+			
+			/* jeżeli stron jest dużo nie wysztkie zostaną wyświetlone jako linki
+			 * tutaj dajemy warunek żeby zawsze wyświetlał link do począteku (strona 1)
+			 */
+			if($pozycje_start>=$stronyOdstep+1)
+				echo '<a href="'.htmlentities($_SERVER['PHP_SELF']).''.$get1.'&pozycje_start=1" class="link3">1</a>';
+			if($pozycje_start>=$stronyOdstep+2)
+				echo '<strong> &nbsp;...&nbsp; </strong>';
+			
+			
+			
+			/* "przewijanie" na dalsze strony tabeli
+			 * wyświetl linki tylko do stron o zadanym odstępie na plus i na minus
+			 */
+			for(	$i = ($pozycje_start>$stronyOdstep)? ($pozycje_start-$stronyOdstep+1) : 1; 
+					($i <= $pozycje_start+$stronyOdstep+1) && ($i <= $iloscStron); 
+					++$i) 
+			{
 				
+				// jeżeli to nie jest aktualna strona
 				if($i != $pozycje_start+1) {		
 					// reszta GET'a
 					$get2='&pozycje_start='.$i;
-					echo '
-						<a href="'.htmlentities($_SERVER['PHP_SELF']).''.$get1.''.$get2.'" class="link3">'.$i.'</a>
-					';
+					echo '<a href="'.htmlentities($_SERVER['PHP_SELF']).''.$get1.''.$get2.'" class="link3">'.$i.'</a>';
 				} else
-					echo '<strong>'.$i.'</strong>';
+					// aktualna strona, więc bez odnośnika
+					echo '<strong> '.$i.' </strong>';
 			}
+			
+			
+			/* tutaj dajemy warunek żeby zawsze wyświetlał link do końca (ostatnia strona)
+			 */
+			if($pozycje_start<=$iloscStron-$stronyOdstep-3)
+				echo '<strong> &nbsp;...&nbsp; </strong>';
+			if($pozycje_start<=$iloscStron-$stronyOdstep-2)
+				echo '<a href="'.htmlentities($_SERVER['PHP_SELF']).''.$get1.'&pozycje_start='.$iloscStron.'" class="link3">'.$iloscStron.'</a>';
+			
+			echo '<br/ ><br />';
 			
 			
 		}
 		
 		
 		// START - zmiana ilości wyświetlanych pozycji na stronie
-		echo '	<br/ ><br />
-				wyświetlaj po: 
-		';
+		echo 'wyświetlaj po:';
 		
 		if($pozycje_limit == 25)
 			echo '<strong>&nbsp;&nbsp;25&nbsp;&nbsp;</strong>';

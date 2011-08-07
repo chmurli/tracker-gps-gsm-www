@@ -248,12 +248,12 @@
 	<table>
 	<tr>
 		<td><b>od:</b></td>
-		<td><script>DateInput('data1', true, 'YYYY-MM-DD' <?php if($data1) echo ', \''.$data1.'\''; ?>)</script></td>
+		<td><script type="text/javascript">DateInput('data1', true, 'YYYY-MM-DD' <?php if($data1) echo ', \''.$data1.'\''; ?>)</script></td>
 		<td><input name="godzina1" type="text" size="5" maxlength="5" value="<?php if($godzina1) echo $godzina1; else echo "06:00"; ?>" /></td>
 	</tr>
 	<tr>
 		<td><b>do:</b></td>
-		<td><script>DateInput('data2', true, 'YYYY-MM-DD' <?php if($data2) echo ', \''.$data2.'\''; ?>)</script></td>
+		<td><script type="text/javascript">DateInput('data2', true, 'YYYY-MM-DD' <?php if($data2) echo ', \''.$data2.'\''; ?>)</script></td>
 		<td><input name="godzina2" type="text" size="5" maxlength="5" value="<?php if($godzina2) echo $godzina2; else echo "23:59"; ?>" /></td>
 	</tr>
 	</table>
