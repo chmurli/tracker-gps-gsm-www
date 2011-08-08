@@ -5,7 +5,7 @@
 	// sprawdź ile maksymalnie pozycji ma być wyświetlanych na jednej stronie
 	if (isset($_GET['pozycje_limit'])) 
 		$pozycje_limit=(int)($_GET['pozycje_limit']);
-	else $pozycje_limit=25;
+	else $pozycje_limit=$limityMozliwe[0];
 
 
 	// sprawdź od której pozycji zacząć wyświetlać
@@ -202,7 +202,6 @@
 		if($rowsFounded > $pozycje_limit){
 			
 			$iloscStron=(int)($rowsAll/$pozycje_limit)+1;
-			$stronyOdstep=4;
 			
 			
 			/* jeżeli stron jest dużo nie wysztkie zostaną wyświetlone jako linki
@@ -246,34 +245,23 @@
 			
 		}
 		
-		
-		// START - zmiana ilości wyświetlanych pozycji na stronie
-		echo 'wyświetlaj po:';
-		
-		if($pozycje_limit == 25)
-			echo '<strong>&nbsp;&nbsp;25&nbsp;&nbsp;</strong>';
-		else	
-			echo '<a href="'.htmlentities($_SERVER['PHP_SELF']).''.$get1.'&pozycje_start=1&pozycje_limit=25" class="link3">25</a>';
-		
-		if($pozycje_limit == 50)
-			echo '<strong>&nbsp;&nbsp;50&nbsp;&nbsp;</strong>';
-		else	
-			echo '<a href="'.htmlentities($_SERVER['PHP_SELF']).''.$get1.'&pozycje_start=1&pozycje_limit=50" class="link3">50</a>';
-		
-		if($pozycje_limit == 100)
-			echo '<strong>&nbsp;&nbsp;100&nbsp;&nbsp;</strong>';
-		else	
-			echo '<a href="'.htmlentities($_SERVER['PHP_SELF']).''.$get1.'&pozycje_start=1&pozycje_limit=100" class="link3">100</a>';
-			
-		if($pozycje_limit == 200)
-			echo '<strong>&nbsp;&nbsp;200&nbsp;&nbsp;</strong>';
-		else	
-			echo '<a href="'.htmlentities($_SERVER['PHP_SELF']).''.$get1.'&pozycje_start=1&pozycje_limit=200" class="link3">200</a>';
-			
-		
-		echo '</p></div>';
-		// KONIEC - zmiana ilości wyświetlanych pozycji na stronie
 
+		// zmiana ilości wyświetlanych pozycji na stronie
+		echo 'wyświetlaj po:';		
+		for ($i=0, $cnt=count($limityMozliwe); $i < $cnt ; ++$i) 
+		{
+			if($limityMozliwe[$i] == $pozycje_limit)
+				echo '<strong>&nbsp;&nbsp;'.$limityMozliwe[$i].'&nbsp;&nbsp;</strong>';
+			else	
+				echo '	<a href="'.htmlentities($_SERVER['PHP_SELF']).''.$get1.'&pozycje_start=1&pozycje_limit='.$limityMozliwe[$i].'" class="link3">'
+						.$limityMozliwe[$i].'</a>
+				';
+		}
+
+
+		echo '</p></div>';	// div .przewijaj_tabele
+
+		
 	}
 
 

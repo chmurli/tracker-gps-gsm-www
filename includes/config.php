@@ -1,5 +1,5 @@
 <?php 
-// tu zawarte są różne zmienne i stałe wykorzystywane wielokrotnie na różnych stronach
+// tu zawarte są różne zmienne i stałe
 
 
 // adres strony
@@ -19,6 +19,12 @@
 		define("_SITE_TITLE", "Open Tracker GPS-GSM - Bartosz Chmura");
 
 
+// możliwe limity wyświetlanych pozycji na jednej stronie
+		$limityMozliwe = array(10, 25, 50, 100, 200);
+/* gdy jest duża ilości stron do wyświetlenia w przeglądzie tabelarycznym -> nie wyświetlamy wszystkich linków
+ * tylko 1 i ostatni oraz zadaną ilośc na + i - od aktualnej strony, definiują ją ta zmienna
+ */
+		$stronyOdstep=4;
 
 
 
