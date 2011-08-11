@@ -1,10 +1,27 @@
 <?php // dołączanie	
 
+	// włącz/wyłącz raportowanie błędów
 	error_reporting(E_ALL);
 
 	echo '<?xml version="1.0" encoding="UTF-8"?>';
 	include('includes/config.php'); 		// stałe konfiguracyjne
 	include('includes/functions.php'); 	// funkcje
+
+
+	// sprawdź czy została przekazana zmienna GET, którą stronę wyświetlić
+	if (isset($_GET['show'])) 
+		$show=$_GET['show']; 
+	else $show='';
+
+	
+	// dozwolone strony do wyświetlenia
+	$allowed = array('start', 'view_googlemaps', 'view_table');
+
+	/* jeżeli wyświetlamy mapę z Google Maps musimy dołączyć dodatkowe dane, które znacznie wydłużą ładowanie się strony,
+	 * w innym przypadku tego nie robimy, przez co strona szybciej się załaduje
+	 */
+	( $show == 'view_googlemaps') ? $useGoogleMap=1 : $useGoogleMap=0;
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
@@ -25,11 +42,20 @@
 	
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script type="text/javascript" src="calendarDateInput.js"></script>
-	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>   
-	
-</head>
-<body onload="mapaStart()">
+	<?php 
 
+		if($useGoogleMap)
+			echo '<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>';   
+	?>
+</head>
+
+<?php 
+
+	if($useGoogleMap)
+		echo '<body onload="mapaStart()">';
+	else
+		echo '<body>';
+?>
 
 
 <div id="logo">
@@ -56,22 +82,16 @@
 
 
 
-<?php // skrypt na wyświetlanie odpowiedniej strony w części głównej z pomocą include()
+<?php 	// wyświetlanie odpowiedniej strony w części głównej z pomocą include()
 
-
-	if (isset($_GET['show'])) 
-		$show=$_GET['show']; 
-	else $show='';
-
-	// dozwolone strony do wyświetlenia
-	$allowed = array('start', 'view_googlemaps', 'view_table');
 
 	if (in_array($show, $allowed)) { 
 		include('show/'.$show.'.php');
 	} 
 	else { 
-		// jeżeli wartość niepoprawna (możliwa próba włamania)
-		// wyświetl stronę startową
+		/* jeżeli wartość niepoprawna (możliwa próba włamania)
+		 * wyświetl stronę startową
+		 */
 		include('show/start.php');
 	}
 
@@ -105,7 +125,7 @@
 	<?php 	// oblicz czas generowania strony, korzystamy z pliku z funkcjami
 		$time_end = getmicrotime();
 		$time = substr($time_end - $time_start, 0, 6);
-		echo ("Czas generowania strony wyniósł <b>".$time."</b> sekund");
+		echo 'Czas generowania strony wyniósł <b>'.$time.'</b> sekund';
 	?>
 
 

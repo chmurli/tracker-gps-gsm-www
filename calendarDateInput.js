@@ -25,7 +25,7 @@ var Today = new Date();
 //var WeekDays = new Array('S','M','T','W','T','F','S');
 var WeekDays = new Array('Ni','Po','Wt','Śr','Cz','Pi','So');
 var MonthDays = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
-var MonthNames = new Array('Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Śierpień','Wrzesień','Pażdziernik','Listopad','Grudzień');
+var MonthNames = new Array('Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Pażdziernik','Listopad','Grudzień');
 //var MonthNames = new Array('January','February','March','April','May','June','July','August','September','October','November','December');
 
 // Write out the stylesheet definition for the calendar
